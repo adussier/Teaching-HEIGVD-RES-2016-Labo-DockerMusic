@@ -1,0 +1,22 @@
+{
+  "name": "image-musician",
+  "version": "1.0.0",
+  "description": "",
+  "main": "musician.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adussier/Teaching-HEIGVD-RES-2016-Labo-DockerMusic.git"
+  },
+  "author": "Amel Dussier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adussier/Teaching-HEIGVD-RES-2016-Labo-DockerMusic/issues"
+  },
+  "homepage": "https://github.com/adussier/Teaching-HEIGVD-RES-2016-Labo-DockerMusic#readme",
+  "dependencies": {
+    "uuid": "latest"
+  }
+}

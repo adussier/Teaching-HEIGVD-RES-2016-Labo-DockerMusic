@@ -1,0 +1,11 @@
+# using latest node.js image
+FROM node:latest
+
+# the author
+MAINTAINER Amel Dussier
+
+# copy all javascript source files
+COPY src /opt/app
+
+# start
+ENTRYPOINT ["node", "/opt/app/musician.js"]
