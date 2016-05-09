@@ -113,8 +113,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | What **payload** should we put in the UDP datagrams? |
 | | The payload is in **JSON**, and contains : a uuid, the type of instrument, and the sound made by the instrument. |
 |Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
-| | In the sender we have an object (generated once), that we send every second. This object is serialized in JSON and sent as payload of an UDP datagram.
-In the reciever we have a list of current active musicians, updated on each TCP datagram recieved. The items of this list are the same objects as sent by the musicians, with an additional member (the **activeSince** value). This list is sent in JSON format to each TCP client who connects to the **Auditor**. |
+| | In the sender we have an object (generated once), that we send every second. This object is serialized in JSON and sent as payload of an UDP datagram. In the reciever we have a list of current active musicians, updated on each TCP datagram recieved. The items of this list are the same objects as sent by the musicians, with an additional member (the **activeSince** value). This list is sent in JSON format to each TCP client who connects to the **Auditor**. |
 
 
 ## Task 2: implement a "musician" Node.js application
@@ -130,9 +129,7 @@ In the reciever we have a list of current active musicians, updated on each TCP 
 |Question | How can we use the `https://www.npmjs.com/` web site? |
 | | It's the website where stored the npm packages. It provides a search tool and informations about every package. |
 |Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122? |
-| | By using a node.js package, like **uuid** for example :
-*var uuid = require("uuid");*
-*var newUuid = uuid = uuid.v4();* |
+| | By using a node.js package, like **uuid** for example : *var uuid = require("uuid"); var newUuid = uuid = uuid.v4();* |
 |Question | In Node.js, how can we execute a function on a **periodic** basis? |
 | | By using the function **setInterval()**. |
 |Question | In Node.js, how can we **emit UDP datagrams**? |
