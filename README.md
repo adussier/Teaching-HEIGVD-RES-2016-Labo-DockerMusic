@@ -105,79 +105,82 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | --- | --- |
 |Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
-| | *Insert your diagram here...* |
+| | ![Diagramme d'architecture](images/architecture.png) |
 |Question | Who is going to **send UDP datagrams** and **when**? |
-| | *Enter your response here...* |
+| | The UDP datagrams are sent by the **musicians** |
 |Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
-| | *Enter your response here...* |
+| | The **Auditor** is listening for UDP datagrams. On every datagram, the list of active musicians is updated. |
 |Question | What **payload** should we put in the UDP datagrams? |
-| | *Enter your response here...* |
+| | The payload is in **JSON**, and contains : a uuid, the type of instrument, and the sound made by the instrument. |
 |Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
-| | *Enter your response here...* |
+| | In the sender we have an object (generated once), that we send every second. This object is serialized in JSON and sent as payload of an UDP datagram.
+In the reciever we have a list of current active musicians, updated on each TCP datagram recieved. The items of this list are the same objects as sent by the musicians, with an additional member (the **activeSince** value). This list is sent in JSON format to each TCP client who connects to the **Auditor**. |
 
 
 ## Task 2: implement a "musician" Node.js application
 
-| #  | Topic
-| ---  | ---
-|Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**?
-| | *Enter your response here...*
-|Question | What is **npm**?
-| | *Enter your response here...*
-|Question | What is the `npm install` command and what is the purpose of the `--save` flag?
-| | *Enter your response here...*
-|Question | How can we use the `https://www.npmjs.com/` web site?
-| | *Enter your response here...*
-|Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122?
-| | *Enter your response here...*
-|Question | In Node.js, how can we execute a function on a **periodic** basis?
-| | *Enter your response here...*
-|Question | In Node.js, how can we **emit UDP datagrams**?
-| | *Enter your response here...*
-|Question | In Node.js, how can we **access the command line arguments**?
-| | *Enter your response here...*
+| #  | Topic |
+| --- | --- |
+|Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**? |
+| | By using the method **JSON.stringify(object)** |
+|Question | What is **npm**? |
+| | **npm** is the **node.js package manager**, a tool for searching, intalling, updating, etc. node.js packages. |
+|Question | What is the `npm install` command and what is the purpose of the `--save` flag? |
+| | This option adds the installed package to the project dependancies (**package.json** file). |
+|Question | How can we use the `https://www.npmjs.com/` web site? |
+| | It's the website where stored the npm packages. It provides a search tool and informations about every package. |
+|Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122? |
+| | By using a node.js package, like **uuid** for example :
+*var uuid = require("uuid");*
+*var newUuid = uuid = uuid.v4();* |
+|Question | In Node.js, how can we execute a function on a **periodic** basis? |
+| | By using the function **setInterval()**. |
+|Question | In Node.js, how can we **emit UDP datagrams**? |
+| | By using the **dgram** package. |
+|Question | In Node.js, how can we **access the command line arguments**? |
+| | The command line arguments are accessible with the **process** variable. For example : *var arg1 = process.argv[2];*. |
 
 
 ## Task 3: package the "musician" app in a Docker image
 
-| #  | Topic
-| ---  | ---
-|Question | How do we **define and build our own Docker image**?
-| | *Enter your response here...*
-|Question | How can we use the `ENTRYPOINT` statement in our Dockerfile?
-| | *Enter your response here...*
-|Question | After building our Docker image, how do we use it to **run containers**?
-| | *Enter your response here...*
-|Question | How do we get the list of all **running containers**?
-| | *Enter your response here...*
-|Question | How do we **stop/kill** one running container?
-| | *Enter your response here...*
-|Question | How can we check that our running containers are effectively sending UDP datagrams?
-| | *Enter your response here...*
+| #  | Topic |
+| ---  | --- |
+|Question | How do we **define and build our own Docker image**? |
+| | W have to create and fill the **Dockerfile**. The parameters in this file are used to build the Docker image. |
+|Question | How can we use the `ENTRYPOINT` statement in our Dockerfile? |
+| | The `ENTRYPOINT` is used to specifiy the action that will be executed when the Docker container has started. For example : `ENTRYPOINT ["node", "/opt/app/musician.js"]`. |
+|Question | After building our Docker image, how do we use it to **run containers**? |
+| | By using the *docker run ...* command. |
+|Question | How do we get the list of all **running containers**? |
+| | By using the *docker ps* command. |
+|Question | How do we **stop/kill** one running container? |
+| | By using the *docker stop/kill <container name>* command. |
+|Question | How can we check that our running containers are effectively sending UDP datagrams? |
+| | We have to use a tool like **tcpdump** to see the exchanged datagrams. |
 
 
 ## Task 4: implement an "auditor" Node.js application
 
-| #  | Topic
-| ---  | ---
-|Question | With Node.js, how can we listen for UDP datagrams in a multicast group?
-| | *Enter your response here...*
-|Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**? 
-| | *Enter your response here...*
-|Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting? 
-| | *Enter your response here...*
-|Question | When and how do we **get rid of inactive players**? 
-| | *Enter your response here...*
-|Question | How do I implement a **simple TCP server** in Node.js? 
-| | *Enter your response here...*
+| #  | Topic |
+| ---  | --- |
+|Question | With Node.js, how can we listen for UDP datagrams in a multicast group? |
+| | First we have to create a **UDP socket** with the **dgram** package. Then we can use the *addMembership()* method on the socket to connect to a multicast group. |
+|Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**? |
+| | A `Map` instance can be used as a dictionary, with its `set()` method to add a key/value pair. But in this project, using a simple **JavaScript array** was sufficient. |
+|Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting? |
+| | The `Moment.js` provides several methods for manipulating dates in different formats and languages. In this project we have only used the basic Javascript **Date**. |
+|Question | When and how do we **get rid of inactive players**? |
+| | Everytime we recieve a datagram, we update the musicians list (the *activeSince* value). Periodically we clean the list by removing every musician which has an outdated *activeSince* value. |
+|Question | How do I implement a **simple TCP server** in Node.js? |
+| | By using the **net** package, and the **createServer()** method. |
 
 
 ## Task 5: package the "auditor" app in a Docker image
 
-| #  | Topic
-| ---  | ---
-|Question | How do we validate that the whole system works, once we have built our Docker image?
-| | *Enter your response here...*
+| #  | Topic |
+| ---  | --- |
+|Question | How do we validate that the whole system works, once we have built our Docker image? |
+| | We can connect to the **Auditor** TCP port, with a tool like **telnet**, and obtain the current active musicans list. On starting or stopping **musician conainters**, we can verify that the list is correctly updated. |
 
 
 ## Constraints
