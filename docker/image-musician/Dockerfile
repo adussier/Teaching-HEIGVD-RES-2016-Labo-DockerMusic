@@ -7,5 +7,8 @@ MAINTAINER Amel Dussier
 # copy all javascript source files
 COPY src /opt/app
 
+# install node.js dependancies
+RUN cd /opt/app && npm install
+
 # start
 ENTRYPOINT ["node", "/opt/app/musician.js"]
