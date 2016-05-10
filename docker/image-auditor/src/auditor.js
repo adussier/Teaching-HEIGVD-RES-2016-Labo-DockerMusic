@@ -29,7 +29,7 @@
 // for UDP
 var dgram = require("dgram");
 
-// for tcp
+// for TCP
 var net = require("net");
 
 // the multicast IP address
@@ -58,7 +58,7 @@ var musicians = [];
 // the interval between each clean of the musician list
 const CLEAN_INTERVAL = 1000;
 
-// the interval between each clean of the musician list
+// the maximal inactivity time before a musician is removed from the list
 const MAX_INACTIVITY = 5000;
 
 
