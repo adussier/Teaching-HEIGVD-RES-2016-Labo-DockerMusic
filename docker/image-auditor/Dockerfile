@@ -2,7 +2,7 @@
 FROM node:latest
 
 # the author
-MAINTAINER Amel Dussier
+MAINTAINER Amel Dussier & Sarra Berich
 
 # the port for connection requests
 EXPOSE 2205

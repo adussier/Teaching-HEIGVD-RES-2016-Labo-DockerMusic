@@ -3,7 +3,7 @@
 // ------------------------------
 
 /*
-	Author : Amel Dussier
+	Author : Amel Dussier & Sarra Berich
 
 	This program simulates someone who listens to an orchestra.
 	The musicians in the orchestra can send their sounds in JSON format to the address MULTICAST_ADDRESS on port UDP_PORT.

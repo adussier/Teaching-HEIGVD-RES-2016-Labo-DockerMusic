@@ -2,7 +2,7 @@
 FROM node:latest
 
 # the author
-MAINTAINER Amel Dussier
+MAINTAINER Amel Dussier & Sarra Berich
 
 # copy all javascript source files
 COPY src /opt/app

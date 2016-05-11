@@ -1,4 +1,4 @@
-#!/bin/bash
+ #!/bin/bash
 
 #
 # This is a bit brutal (and will affect your system if you are running other

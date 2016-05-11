@@ -3,7 +3,7 @@
 // ------------------------------
 
 /*
-	Author : Amel Dussier
+	Author : Amel Dussier & Sarra Berich
 
 	This program simulates a musician.
 	A required parameter is the type of instrument, which must be member of the INSTRUMENTS list.
